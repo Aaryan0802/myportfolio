@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaryan Patil | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root { --bg: #0a0a0a; --accent: #ffffff; }
+        body { background-color: var(--bg); color: var(--accent); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .serif { font-family: 'Playfair Display', serif; }
+
+        /* Custom Cursor - Hidden on Touch Devices */
+        @media (pointer: fine) {
+            .cursor { width: 20px; height: 20px; border: 1px solid white; border-radius: 50%; position: fixed; pointer-events: none; z-index: 999; transition: transform 0.1s ease; }
+        }
+
+        /* Scroll Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .progress-bar { transform: scaleX(0); transform-origin: left; transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
+        .progress-bar.active { transform: scaleX(1); }
+
+        .hero-img { filter: grayscale(100%); transition: filter 0.8s ease, transform 0.8s ease; }
+        .hero-img:hover { filter: grayscale(0%); transform: scale(1.02); }
+
+        /* Cinematic Name Reveal */
+        @keyframes cinematic-reveal {
+            0% { 
+                opacity: 0; 
+                filter: blur(12px); 
+                transform: translateY(20px) scale(0.98); 
+            }
+            100% { 
+                opacity: 1; 
+                filter: blur(0); 
+                transform: translateY(0) scale(1); 
+            }
+        }
+        
+        .name-reveal {
+            opacity: 0; 
+            animation: cinematic-reveal 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.5s; 
+            display: block;
+        }
+
+        /* Rotating Badge Animation */
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 10s linear infinite; }
+
+        /* Subtle Background Grain */
+        .bg-grain {
+            position: fixed; inset: 0; z-index: -1; opacity: 0.03; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { width: 0px; }
+    </style>
+</head>
+<body class="antialiased relative">
+    
+    <div class="bg-grain"></div>
+    <div class="cursor hidden md:block" id="cursor"></div>
+
+    <nav class="fixed top-0 w-full z-50 flex flex-col md:flex-row justify-between items-center gap-4 p-6 md:p-8 text-[10px] uppercase tracking-[0.3em] font-medium mix-blend-difference">
+        <a href="#" class="hover:opacity-50 transition-opacity w-full text-center md:text-left md:w-auto font-bold tracking-widest text-sm">
+            AP.
+        </a>
+        <div class="flex gap-4 md:gap-12 flex-wrap justify-center">
+            <a href="#about" class="hover:opacity-50 transition-opacity">About</a>
+            <a href="#expertise" class="hover:opacity-50 transition-opacity">Skills</a>
+            <a href="#work" class="hover:opacity-50 transition-opacity">Work</a>
+            <a href="#contact" class="hover:opacity-50 transition-opacity">Contact</a>
+        </div>
+    </nav>
+
+    <section class="relative h-screen flex flex-col justify-end px-4 sm:px-8 md:px-24 pb-12 md:pb-16 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="img.png" 
+                 alt="Portrait" class="hero-img w-full h-full object-cover object-top opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+        </div>
+
+        <div class="relative z-10 w-full flex flex-col md:flex-row justify-between items-end gap-8">
+            
+            <div class="name-reveal w-full md:w-auto">
+                <h2 class="serif italic text-2xl md:text-4xl font-light mb-[-0.5rem] ml-1 text-gray-300">Selected Works</h2>
+                <h1 class="text-[16vw] md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-none text-white drop-shadow-2xl">
+                    AARYAN<br>PATIL
+                </h1>
+            </div>
+
+            <div class="flex flex-col items-start md:items-end w-full md:w-auto pb-2 reveal" style="transition-delay: 0.8s;">
+                <div class="relative w-24 h-24 mb-8 hidden md:flex items-center justify-center">
+                    <svg class="animate-spin-slow w-full h-full" viewBox="0 0 100 100">
+                        <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                        <text class="text-[10px] uppercase tracking-[0.2em] fill-white" font-family="Inter" font-weight="bold">
+                            <textPath href="#circlePath">Crafting Digital Experiences • Full Stack Dev •</textPath>
+                        </text>
+                    </svg>
+                    <i data-lucide="arrow-down" class="absolute w-5 h-5 text-white"></i>
+                </div>
+
+                <div class="text-[10px] sm:text-xs uppercase tracking-widest leading-loose text-gray-400 md:text-right mb-4">
+                    00 / Based in Pune <br> Full-Stack Developer
+                </div>
+                <div class="text-[10px] uppercase tracking-widest animate-bounce text-white">Scroll Down ↓</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="py-24 md:py-32 px-6 sm:px-8 md:px-24 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div class="reveal">
+            <p class="text-xs uppercase tracking-widest text-gray-500 mb-6 md:mb-8">01 / The Story</p>
+            <h3 class="text-3xl sm:text-4xl md:text-6xl font-light leading-tight">
+                Building <span class="serif italic">scalable</span> digital solutions through clean code and modern architecture.
+            </h3>
+        </div>
+        <div class="reveal" style="transition-delay: 0.2s;">
+            <p class="text-gray-400 leading-relaxed text-base md:text-lg font-light mb-8">
+                I am a full-stack developer passionate about creating seamless web experiences. From crafting responsive front-end interfaces to architecting robust backend APIs using Python and PHP, I bridge the gap between aesthetics and heavy-duty logic.
+            </p>
+            <div class="flex gap-6">
+                <i data-lucide="layout-template" class="w-5 h-5 text-gray-500 hover:text-white transition-colors cursor-pointer"></i>
+                <i data-lucide="database" class="w-5 h-5 text-gray-500 hover:text-white transition-colors cursor-pointer"></i>
+                <i data-lucide="server" class="w-5 h-5 text-gray-500 hover:text-white transition-colors cursor-pointer"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="py-24 md:py-32 px-6 sm:px-8 md:px-24 bg-[#0f0f0f]">
+        <div class="mb-16 md:mb-20 reveal">
+            <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">02 / Expertise</p>
+            <h4 class="text-4xl md:text-5xl font-bold">Tech Stack & Skills</h4>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-x-32 gap-y-12 md:gap-y-16">
+            
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-4 text-[10px] sm:text-xs uppercase tracking-widest text-white">
+                    <span class="text-gray-500">01.</span>
+                    <span>Front-End (HTML, CSS, Tailwind)</span>
+                </div>
+                <div class="progress-bar h-[1px] bg-white/30 w-full"></div>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.1s;">
+                <div class="flex items-center gap-4 mb-4 text-[10px] sm:text-xs uppercase tracking-widest text-white">
+                    <span class="text-gray-500">02.</span>
+                    <span>JavaScript & Frameworks</span>
+                </div>
+                <div class="progress-bar h-[1px] bg-white/30 w-full"></div>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <div class="flex items-center gap-4 mb-4 text-[10px] sm:text-xs uppercase tracking-widest text-white">
+                    <span class="text-gray-500">03.</span>
+                    <span>Backend Dev (PHP & Server Logic)</span>
+                </div>
+                <div class="progress-bar h-[1px] bg-white/30 w-full"></div>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.3s;">
+                <div class="flex items-center gap-4 mb-4 text-[10px] sm:text-xs uppercase tracking-widest text-white">
+                    <span class="text-gray-500">04.</span>
+                    <span>API Dev (FastAPI, Python)</span>
+                </div>
+                <div class="progress-bar h-[1px] bg-white/30 w-full"></div>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.4s;">
+                <div class="flex items-center gap-4 mb-4 text-[10px] sm:text-xs uppercase tracking-widest text-white">
+                    <span class="text-gray-500">05.</span>
+                    <span>Databases (SQL)</span>
+                </div>
+                <div class="progress-bar h-[1px] bg-white/30 w-full"></div>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.5s;">
+                <div class="flex items-center gap-4 mb-4 text-[10px] sm:text-xs uppercase tracking-widest text-white">
+                    <span class="text-gray-500">06.</span>
+                    <span>Version Control (Git & GitHub)</span>
+                </div>
+                <div class="progress-bar h-[1px] bg-white/30 w-full"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="work" class="py-24 md:py-32 px-6 sm:px-8 md:px-24">
+        <div class="mb-16 md:mb-20 reveal flex justify-between items-end">
+            <div>
+                <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">03 / Selected Works</p>
+                <h4 class="text-4xl md:text-5xl font-bold">Featured Projects</h4>
+            </div>
+            <a href="#" class="hidden sm:flex items-center gap-2 text-xs uppercase tracking-widest hover:opacity-50 transition">
+                View All <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-16 md:gap-24">
+            
+            <a href="https://github.com/yourusername/modulab" target="_blank" class="group block reveal">
+                <div class="overflow-hidden mb-6 h-[300px] sm:h-[400px] md:h-[500px] bg-[#1a1a1a] relative">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070" 
+                         alt="Modulab Project" 
+                         class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-105 filter grayscale group-hover:grayscale-0">
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h5 class="text-xl sm:text-2xl font-bold mb-2 group-hover:text-gray-300 transition-colors">Modulab</h5>
+                        <p class="text-gray-400 text-xs sm:text-sm">STEM Educational Web Interface & Logic</p>
+                        <div class="flex flex-wrap gap-2 sm:gap-3 mt-4">
+                            <span class="text-[9px] sm:text-[10px] border border-white/20 px-3 py-1 rounded-full text-gray-300">FastAPI</span>
+                            <span class="text-[9px] sm:text-[10px] border border-white/20 px-3 py-1 rounded-full text-gray-300">JavaScript</span>
+                        </div>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-6 h-6 sm:w-8 sm:h-8 transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2"></i>
+                </div>
+            </a>
+
+            <a href="https://www.allwinacademy.in" target="_blank" class="group block reveal md:mt-32">
+                <div class="overflow-hidden mb-6 h-[300px] sm:h-[400px] md:h-[500px] bg-[#1a1a1a] relative">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition duration-500 z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070" 
+                         alt="Allwin Academy" 
+                         class="w-full h-full object-cover transition duration-700 ease-in-out group-hover:scale-105 filter grayscale group-hover:grayscale-0">
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h5 class="text-xl sm:text-2xl font-bold mb-2 group-hover:text-gray-300 transition-colors">Allwin Academy</h5>
+                        <p class="text-gray-400 text-xs sm:text-sm">Full-Stack Educational Platform</p>
+                        <div class="flex flex-wrap gap-2 sm:gap-3 mt-4">
+                            <span class="text-[9px] sm:text-[10px] border border-white/20 px-3 py-1 rounded-full text-gray-300">PHP</span>
+                            <span class="text-[9px] sm:text-[10px] border border-white/20 px-3 py-1 rounded-full text-gray-300">SQL</span>
+                        </div>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-6 h-6 sm:w-8 sm:h-8 transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-2"></i>
+                </div>
+            </a>
+
+        </div>
+        
+        <div class="mt-12 text-center sm:hidden reveal">
+            <a href="#" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest border border-white/20 px-6 py-3 rounded-full hover:bg-white hover:text-black transition">
+                View All Projects <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer id="contact" class="py-24 md:py-40 px-6 sm:px-8 md:px-24 text-center bg-[#050505]">
+        <p class="text-xs uppercase tracking-widest text-gray-500 mb-6 md:mb-8 reveal">04 / Let's Connect</p>
+        <h2 class="text-4xl sm:text-6xl md:text-9xl font-black tracking-tighter mb-8 md:mb-12 reveal">LETS TALK.</h2>
+        <a href="mailto:aaryan567go@gmail.com" class="serif italic text-lg sm:text-2xl md:text-4xl hover:opacity-50 transition reveal relative inline-block group break-all">
+            aaryan567go@gmail.com
+            <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        
+        <div class="mt-24 md:mt-40 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-500 gap-8 reveal">
+            <p class="text-center md:text-left">© 2026 AARYAN PATIL. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-8 md:gap-12">
+                <a href="https://github.com/Aaryan0802" target="_blank" class="hover:text-white transition">GitHub</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="hover:text-white transition">LinkedIn</a>
+                <a href="#" class="hover:text-white transition">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const cursor = document.getElementById('cursor');
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+            });
+        }
+
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    const bar = entry.target.querySelector('.progress-bar');
+                    if(bar) bar.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
